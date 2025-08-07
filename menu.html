@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Ordering Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* background-color: thistle;*/
+            background-image: url('menu.jpg');
+            background-size: cover;
+            /* This ensures the image covers the entire background */
+            background-repeat: no-repeat;
+            /* This ensures the image isn't repeated */
+            background-position: center;
+            /* This centers the image */
+            background-attachment: fixed;
+
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .menu-item {
+            display: inline-block;
+            margin: 5%;
+            width: 30%;
+            color: aliceblue;
+        }
+
+        .menu-item img {
+            max-width: 250px;
+        }
+
+        .order-summary {
+            border: 1px solid #333;
+            padding: 10px;
+            margin-top: 20px;
+            color: aliceblue;
+        }
+
+        .order-summary h2 {
+            margin-top: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #totalAmount {
+            color: red;
+        }
+
+        .logo {
+            position: absolute;
+            /* Allows the logo to remain fixed at the same position, even when the user scrolls */
+            top: 0;
+            /* Distance from the top of the page */
+            left: 500px;
+            /* Distance from the right side of the page */
+            width: 100px;
+            /* Adjust this to the width of your logo */
+            height: auto;
+            /* Maintain aspect ratio */
+            z-index: 2000;
+            /* Adjust this based on your design needs */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="logo.jpg" alt="Your Logo" class="logo" />
+        <h1>Food Planet </h1>
+    </header>
+    <main>
+        <div class="menu-item">
+            <h2>Breakfast</h2>
+            <ul>
+                <li>
+                    <h3>Masala Dosa</h3>
+                    <img src="masala dosa.jpg" width="50%">
+                    <p>₹50.00</p>
+                    <input type="checkbox" id="breakfast1" value="50.00">
+                    <label for="quantity_breakfast1">Masala Dosa</label>
+                    <input type="number" id="quantity_breakfast1" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_breakfast1">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Poori and Saagu</h3>
+                    <img src="chole bature.jpg" width="50%">
+                    <p>₹60.00</p>
+                    <input type="checkbox" id="breakfast2" value="60.00">
+                    <label for="quantity_breakfast2">Poori and Saagu</label>
+                    <input type="number" id="quantity_breakfast2" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_breakfast2">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Idli and Vada</h3>
+                    <img src="idli.jpg" width="50%">
+                    <p>₹45.00</p>
+                    <input type="checkbox" id="breakfast3" value="45.00">
+                    <label for="quantity_breakfast3">Idli and Vada</label>
+                    <input type="number" id="quantity_breakfast3" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_breakfast3">0.00</span></span>
+                </li>
+                <!-- Add more breakfast items here -->
+            </ul>
+        </div>
+        <div class="menu-item">
+            <h2>Lunch</h2>
+            <ul>
+                <li>
+                    <h3>Kerala Meals</h3>
+                    <img src="south indian meals.jpg" width="50%">
+                    <p>₹70.00</p>
+                    <input type="checkbox" id="lunch1" value="70.00">
+                    <label for="quantity_lunch1">Kerala Meals</label>
+                    <input type="number" id="quantity_lunch1" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_lunch1">0.00</span></span>
+                </li>
+                <li>
+                    <h3>North Indian Meals</h3>
+                    <img src="meals2.jpg" width="50%">
+                    <p>₹120.00</p>
+                    <input type="checkbox" id="lunch2" value="120.00">
+                    <label for="quantity_lunch2">North Indian Meals</label>
+                    <input type="number" id="quantity_lunch2" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_lunch2">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Chapati Meals</h3>
+                    <img src="meals.jpg" width="50%">
+                    <p>₹95.00</p>
+                    <input type="checkbox" id="lunch3" value="95.00">
+                    <label for="quantity_lunch3">Chapati Meals</label>
+                    <input type="number" id="quantity_lunch3" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_lunch3">0.00</span></span>
+                </li>
+                <!-- Add more lunch items here -->
+            </ul>
+        </div>
+        <div class="menu-item">
+            <h2>Dinner</h2>
+            <ul>
+                <li>
+                    <h3>Pasta</h3>
+                    <img src="pasta.jpg" width="80%">
+                    <p>₹80.00</p>
+                    <input type="checkbox" id="dinner1" value="80.00">
+                    <label for="quantity_dinner1">Pasta</label>
+                    <input type="number" id="quantity_dinner1" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_dinner1">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Curd Rice</h3>
+                    <img src="curd rice.jpg" width="80%">
+                    <p>₹40.00</p>
+                    <input type="checkbox" id="dinner2" value="40.00">
+                    <label for="quantity_dinner2">Curd Rice</label>
+                    <input type="number" id="quantity_dinner2" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_dinner2">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Rice Bowl</h3>
+                    <img src="meals2.jpg" width="80%">
+                    <p>₹65.00</p>
+                    <input type="checkbox" id="dinner3" value="65.00">
+                    <label for="quantity_dinner3">Rice Bowl</label>
+                    <input type="number" id="quantity_dinner3" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_dinner3">0.00</span></span>
+                </li>
+                <!-- Add more dinner items here -->
+            </ul>
+        </div>
+        <div class="menu-item">
+            <h2>Starter</h2>
+            <ul>
+                <li>
+                    <h3>Paneer Tikka</h3>
+                    <img src="paneer tikka.jpg" width="50%">
+                    <p>₹150.00</p>
+                    <input type="checkbox" id="starter1" value="150.00">
+                    <label for="quantity_starter1">Paneer Tikka</label>
+                    <input type="number" id="quantity_starter1" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_starter1">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Gobi</h3>
+                    <img src="gobi.jpg" width="50%">
+                    <p>₹70.00</p>
+                    <input type="checkbox" id="starter2" value="70.00">
+                    <label for="quantity_starter2">Gobi</label>
+                    <input type="number" id="quantity_starter2" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_starter2">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Aloo Gobi</h3>
+                    <img src="drygobi.jpg" width="50%">
+                    <p>₹75.00</p>
+                    <input type="checkbox" id="starter3" value="75.00">
+                    <label for="quantity_starter3">Aloo Gobi</label>
+                    <input type="number" id="quantity_starter3" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_starter3">0.00</span></span>
+                </li>
+                <!-- Add more dinner items here -->
+            </ul>
+        </div>
+        <div class="menu-item">
+            <h2>Juice</h2>
+            <ul>
+                <li>
+                    <h3>WaterMelon Juice</h3>
+                    <img src="strawberry juice.jpg" width="50%">
+                    <p>₹50.00</p>
+                    <input type="checkbox" id="juice1" value="50.00">
+                    <label for="quantity_juice1">Watermelon Juice</label>
+                    <input type="number" id="quantity_juice1" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_juice1">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Orange Juice</h3>
+                    <img src="orange juice.jpg" width="50%">
+                    <p>₹40.00</p>
+                    <input type="checkbox" id="juice2" value="40.00">
+                    <label for="quantity_juice2">Orange Juice</label>
+                    <input type="number" id="quantity_juice2" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_juice2">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Mixed Fruit Juice</h3>
+                    <img src="strawberry juice.jpg" width="50%">
+                    <p>₹60.00</p>
+                    <input type="checkbox" id="juice3" value="60.00">
+                    <label for="quantity_juice3">Mixed Fruit Juice</label>
+                    <input type="number" id="quantity_juice3" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_juice3">0.00</span></span>
+                </li>
+                <!-- Add more dinner items here -->
+            </ul>
+        </div>
+        <div class="menu-item">
+            <h2>Milkshake</h2>
+            <ul>
+                <li>
+                    <h3>Strawberry Milkshake</h3>
+                    <img src="strawberry milkshake.jpg" width="50%">
+                    <p>₹80.00</p>
+                    <input type="checkbox" id="milkshake1" value="80.00">
+                    <label for="quantity_milkshake1">Strawberry Milkshake</label>
+                    <input type="number" id="quantity_milkshake1" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_milkshake1">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Chacolate Milkshake</h3>
+                    <img src="chacoloate milkshake.jpg" width="50%">
+                    <p>₹90.00</p>
+                    <input type="checkbox" id="milkshake2" value="90.00">
+                    <label for="quantity_milkshake2">Chacolate Milkshake</label>
+                    <input type="number" id="quantity_milkshake2" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_milkshake2">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Chacolate Gudbud</h3>
+                    <img src="ice cream.jpg" width="50%">
+                    <p>₹180.00</p>
+                    <input type="checkbox" id="milkshake3" value="180.00">
+                    <label for="quantity_milkshake3">Chacolate Gudbud</label>
+                    <input type="number" id="quantity_milkshake3" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_milkshake3">0.00</span></span>
+                </li>
+                <!-- Add more dinner items here -->
+            </ul>
+        </div>
+        <div class="menu-item">
+            <h2>Dessert</h2>
+            <ul>
+                <li>
+                    <h3>Chacolate Mousse</h3>
+                    <img src="coldcoffee.jpg" width="80%">
+                    <p>₹90.00</p>
+                    <input type="checkbox" id="dessert1" value="90.00">
+                    <label for="quantity_dessert1">Chacolate Mousse</label>
+                    <input type="number" id="quantity_dessert1" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_dessert1">0.00</span></span>
+                </li>
+                <li>
+                    <h3> Fruit Delicious</h3>
+                    <img src="dessert.jpg" width="80%">
+                    <p>₹199.00</p>
+                    <input type="checkbox" id="dessert2" value="199.00">
+                    <label for="quantity_dessert2">Fruit Delicious</label>
+                    <input type="number" id="quantity_dessert2" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_dessert2">0.00</span></span>
+                </li>
+                <h3>Cake</h3>
+                <img src="dessert.jpg" width="80%">
+                <p>₹180.00</p>
+                <input type="checkbox" id="dessert3" value="180.00">
+                <label for="quantity_dessert3">Cake</label>
+                <input type="number" id="quantity_dessert3" value="0">
+                <br>
+                <span>Total Price: ₹<span id="total_dessert3">0.00</span></span>
+                </li>
+                <!-- Add more dinner items here -->
+            </ul>
+        </div>
+        <div class="menu-item">
+            <h2>Biriyani</h2>
+            <ul>
+                <li>
+                    <h3>Veg Biriyani</h3>
+                    <img src="veg pulav.jpg" width="40%">
+                    <p>₹200.00</p>
+                    <input type="checkbox" id="biriyani1" value="200.00">
+                    <label for="quantity_biriyani1">Veg Biriyani</label>
+                    <input type="number" id="quantity_biriyani1" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_biriyani1">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Paneer Biriyani</h3>
+                    <img src="paneer pulav.jpg" width="40%">
+                    <p>₹250.00</p>
+                    <input type="checkbox" id="biriyani2" value="250.00">
+                    <label for="quantity_biriyani2">Paneer Biriyani</label>
+                    <input type="number" id="quantity_biriyani2" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_biriyani2">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Gobi Biriyani</h3>
+                    <img src="rice bath.jpg" width="40%">
+                    <p>₹180.00</p>
+                    <input type="checkbox" id="biriyani3" value="180.00">
+                    <label for="quantity_biriyani3">Gobi Biriyani</label>
+                    <input type="number" id="quantity_biriyani3" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_biriyani3">0.00</span></span>
+                </li>
+                <!-- Add more dinner items here -->
+            </ul>
+        </div>
+        <div class="menu-item">
+            <h2>Chaat</h2>
+            <ul>
+                <li>
+                    <h3>Dahi Puri</h3>
+                    <img src="dahi chat.jpeg" width="50%">
+                    <p>₹45.00</p>
+                    <input type="checkbox" id="chaat1" value="45.00">
+                    <label for="quantity_chaat1">Dahi Puri</label>
+                    <input type="number" id="quantity_chaat1" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_chaat1">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Pani Puri</h3>
+                    <img src="dahi puri.jpeg" width="50%">
+                    <p>₹35.00</p>
+                    <input type="checkbox" id="chaat2" value="35.00">
+                    <label for="quantity_chaat2">Pani Puri</label>
+                    <input type="number" id="quantity_chaat2" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_chaat2">0.00</span></span>
+                </li>
+                <li>
+                    <h3>Masala Puri</h3>
+                    <img src="masala dosa.jpg" width="50%">
+                    <p>₹35.00</p>
+                    <input type="checkbox" id="chaat3" value="35.00">
+                    <label for="quantity_chaat3">Masala Puri</label>
+                    <input type="number" id="quantity_chaat3" value="0">
+                    <br>
+                    <span>Total Price: ₹<span id="total_chaat3">0.00</span></span>
+                </li>
+                <!-- Add more dinner items here -->
+            </ul>
+        </div>
+        <!-- Add more menu categories and items as needed -->
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div class="container">
+                <table id="billTable">
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </table>
+                <div id="totalBill">
+                    <h3>Total: ₹<span id="totalAmount">0.00</span></h3>
+                </div>
+            </div>
+            <h2>Total Order Price: ₹<span id="totalOrder">0.00</span></h2>
+            <button id="submitOrder">Submit Order</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Food Ordering Website</p>
+    </footer>
+    <script>
+        function updateTotalPrice(itemNum, price) {
+            var quantity = document.getElementById("quantity_" + itemNum).value;
+            var total = quantity * price;
+            document.getElementById("total_" + itemNum).innerText = total.toFixed(2);
+            updateTotalOrder();
+        }
+
+        function updateTotalOrder() {
+            var totalOrder = 0;
+            // Calculate total order price by summing up individual item totals
+            var itemTotals = document.querySelectorAll('[id^="total_"]');
+            itemTotals.forEach(function (item) {
+                totalOrder += parseFloat(item.innerText);
+            });
+            document.getElementById("totalOrder").innerText = totalOrder.toFixed(2);
+            // Add call to updateBillTable function
+            updateBillTable();
+        }
+
+        // Add event listeners for quantity change of each item
+        document.querySelectorAll('[id^="quantity_"]').forEach(function (item) {
+            item.addEventListener("change", function () {
+                var itemId = this.id.split("_")[1];
+                var price = parseFloat(document.getElementById(itemId).value);
+                updateTotalPrice(itemId, price);
+            });
+        });
+
+        // Event listener for submitting the order
+        document.getElementById('submitOrder').addEventListener('click', () => {
+            var totalOrder = parseFloat(document.getElementById("totalOrder").innerText);
+            if (totalOrder === 0) {
+                alert('Please select items before submitting the order.');
+            } else {
+                alert('Order submitted successfully! Total Amount: ₹' + totalOrder.toFixed(2));
+                // You can add more code here to handle the order submission, like sending the order details to a backend server
+            }
+        });
+
+        // Define the updateBillTable function to update the bill table
+        function updateBillTable() {
+            // Get all menu items
+            var menuItems = document.querySelectorAll('[id^="quantity_"]');
+            // Initialize total bill to 0
+            var totalBill = 0;
+            // Remove existing rows from the table
+            document.getElementById('billTable').innerHTML = '<tr><th>Item Name</th><th>Quantity</th><th>Price</th><th>Total</th></tr>';
+            // Loop through each item
+            menuItems.forEach(function (item) {
+                // Get the item ID (e.g., breakfast1, lunch2, etc.)
+                var itemId = item.id.split("_")[1];
+                // Get the quantity selected for this item
+                var quantity = item.value;
+                // If quantity is greater than 0, add a row to the bill table
+                if (quantity > 0) {
+                    // Get the price for this item
+                    var price = parseFloat(document.getElementById(itemId).value);
+                    // Calculate the total for this item
+                    var total = quantity * price;
+                    // Add this item's total to the total bill
+                    totalBill += total;
+                    // Create a new row
+                    var newRow = '<tr><td>' + document.querySelector('[for="quantity_' + itemId + '"]').innerText + '</td><td>' + quantity + '</td><td>₹' + price.toFixed(2) + '</td><td>₹' + total.toFixed(2) + '</td></tr>';
+                    // Append the new row to the bill table
+                    document.getElementById('billTable').innerHTML += newRow;
+                }
+            });
+            // Update the total amount in the bill table
+            document.getElementById('totalAmount').innerText = totalBill.toFixed(2);
+        }
+
+    </script>
+</body>
+
+</html>
